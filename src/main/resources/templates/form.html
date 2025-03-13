@@ -30,33 +30,33 @@
 
     <form class="c-c-c" th:each="ele : ${qList}" style="margin-bottom: 10px; border: 3px solid black; padding: 10px;">
         <div class="r-c-c">
-        <input type="text" class="qnum-input" style="font-size: 25px; color: orange;" th:data-qno="${ele.qnum}" th:value="${ele.qnum}">&nbsp;:&nbsp;</input> <input type="text" class="question" th:data-qno="${ele.qnum}" style="width: 90%; height: 40px; margin-bottom: 10px; border-bottom: 2px solid black;" th:value="${ele.question}">
+        <input type="text" class="qnum-input" style="font-size: 25px; color: orange;" th:value="${ele.qnum}">&nbsp;:&nbsp;</input> <input type="text" class="question" style="width: 90%; height: 40px; margin-bottom: 10px; border-bottom: 2px solid black;" th:value="${ele.question}">
         </div>
 
         <div class="r-c-c">
-            <div>1 :&nbsp;&nbsp;</div> <input type="text"  class="option-1" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op1}">
+            <div>1 :&nbsp;&nbsp;</div> <input type="text"  class="option-1" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op1}">
         </div>
 
         <div class="r-c-c">
-            <div>2 :&nbsp;&nbsp;</div> <input type="text"  class="question-2" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op2}">
+            <div>2 :&nbsp;&nbsp;</div> <input type="text"  class="question-2" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op2}">
         </div>
 
         <div class="r-c-c">
-            <div>3 :&nbsp;&nbsp;</div> <input type="text"  class="question-3" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op3}">
+            <div>3 :&nbsp;&nbsp;</div> <input type="text"  class="question-3" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op3}">
         </div>
 
         <div class="r-c-c">
-            <div>4 :&nbsp;&nbsp;</div> <input type="text"  class="question-4" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op4}">
+            <div>4 :&nbsp;&nbsp;</div> <input type="text"  class="question-4" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op4}">
         </div>
 
         <div class="r-c-c">
-            <div>5 :&nbsp;&nbsp;</div> <input type="text"  class="question-5" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op5}">
+            <div>5 :&nbsp;&nbsp;</div> <input type="text"  class="question-5" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op5}">
         </div>
 
         <div class="r-c-c">
-            <button class="q-img-btn" th:id="${ele.qnum}">이미지 추가</button>
+            <button class="q-img-btn">이미지 추가</button>
 
-            <button type="button" style="margin-left: 20px;" class="q-submit-btn" th:data-id="${ele.qnum}">저장</button>
+            <button type="button" style="margin-left: 20px;" class="q-submit-btn">저장</button>
         </div>
     </form>
 
