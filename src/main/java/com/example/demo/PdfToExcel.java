@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class PdfToExcel {
@@ -138,12 +140,37 @@ public class PdfToExcel {
                 }
 
             }
-
+            
+            // 문제 구성 요소 시작 끝 표시
             pdfText = pdfText.replaceAll("\\[(\\d+)～(\\d+)\\]" , "_sCp[$1~$2]") // 공통 지문 시작
                     .replaceAll("(_sCp)(.*?)(<br>)(\\d+\\.)" , "$1$2/eCp<br>$4") // 공통 지문 끝
                     .replaceAll("(<br>)(\\d+\\.)" , "<br>_sQ$2") // 문제 시작
                     .replaceAll("(⑤)(.*?)(?=<br>)" , "$1$2/5e<br>") // 5번 선택지 종료
                     .replaceAll("<br>", "");
+
+
+            // 공통 보기 List
+            List<Map<String,String>> cpList = new ArrayList<>();
+            Pattern cpPattern = Pattern.compile("_sCp(.*?)/eCp");
+            Matcher matcher = cpPattern.matcher(pdfText);
+            while (matcher.find()) {
+
+                String matchStr = matcher.group(1);
+
+                String reg = "\\[(\\d+)~(\\d+)\\]";
+
+                Matcher mat = Pattern.compile(reg).matcher(matchStr);
+
+                String nums =  mat.find() ? mat.group() : "";
+                String content = matchStr.replaceAll(reg , "");
+
+                Map<String,String> element = new HashMap<>();
+                element.put("nums" , nums);
+                element.put("content" , content);
+
+                cpList.add(element);
+            }
+
 
 
             /*
