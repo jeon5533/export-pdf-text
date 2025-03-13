@@ -152,12 +152,12 @@ public class PdfToExcel {
              * 선택지 시작 끝 _1s , /1e - ok (5번 처리 필요)
              */
             pdfText = pdfText.replaceAll("(_sCp)(.*?)(/eCp)" , "<textarea class=\"t-ar\">$2</textarea><div class=\"line\"></div>")
-                            .replaceAll("(_sQ)(.*?)(/eQ)" , "<input type=\"text\" class=\"q-ar\" value=\"$2\"/>")
-                            .replaceAll("(_1s)(.*?)(/1e)","<input type=\"text\" class=\"op-ar\" value=\"$2\"/>")
-                            .replaceAll("(_2s)(.*?)(/2e)","<input type=\"text\" class=\"op-ar\" value=\"$2\"/>")
-                            .replaceAll("(_3s)(.*?)(/3e)","<input type=\"text\" class=\"op-ar\" value=\"$2\"/>")
-                            .replaceAll("(_4s)(.*?)(/4e)","<input type=\"text\" class=\"op-ar\" value=\"$2\"/>")
-                            .replaceAll("(_5s)(.*?)(/5e)","<input type=\"text\" class=\"op-ar\" value=\"$2\"/><div class=\"line\"></div>");
+                            .replaceAll("(_sQ)(\\d+)(.)(.*?)(/eQ)" , "<input type=\"text\" class=\"q-ar\" data-qtionno=\"$2\" value=\"$4\"/>")
+                            .replaceAll("(_1s)(.*?)(/1e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"1\" value=\"$2\"/>")
+                            .replaceAll("(_2s)(.*?)(/2e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"2\" value=\"$2\"/>")
+                            .replaceAll("(_3s)(.*?)(/3e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"3\" value=\"$2\"/>")
+                            .replaceAll("(_4s)(.*?)(/4e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"4\" value=\"$2\"/>")
+                            .replaceAll("(_5s)(.*?)(/5e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"5\" value=\"$2\"/><div class=\"line\"></div>");
 
             System.out.println(pdfText);
             // pdfText = "";
