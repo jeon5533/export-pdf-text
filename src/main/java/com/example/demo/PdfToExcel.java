@@ -22,10 +22,10 @@ public class PdfToExcel {
     public String run(Model model) throws Exception{
 
         // 수능 국어 기출 문제 폴더 : 2015 ~ 2025
-        String folderPath = "C:\\Users\\jeon\\Desktop\\pdf_to_excel\\kor\\25_O_odd.pdf";
+        String filePath = "C:\\Project\\exam\\2025_kor_odd.pdf";
 
         // 디렉토리
-        File file = new File(folderPath);
+        File file = new File(filePath);
 
 
         String pdfText = "";
