@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+
+    <link rel="stylesheet" th:href="@{/common.css}">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+</head>
+<body>
+
+<div th:utext="${content}"></div>
+
+<!-- script -->
+<script th:src="@{/common.js}"></script>
+</body>
+</html>
