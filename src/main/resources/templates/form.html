@@ -19,22 +19,45 @@
     <div class="c-c-c" th:each="ele : ${cpList}" style="margin-bottom: 10px; border: 3px solid black; padding: 10px;">
         <div style="margin-bottom: 5px; border-bottom: 1px solid black;">[[${ele.nums}]]</div>
 
-        <div>[[${ele.content}]]</div>
+        <textarea class="cp" th:id="${ele.nums}" style="width: 100%; height: 400px;">[[${ele.content}]]</textarea>
+
+        <div class="r-c-c">
+            <button class="cp-img-btn" th:id="${ele.nums}">이미지 추가</button>
+
+            <button style="margin-left: 20px;" class="cp-submit-btn" th:id="${ele.nums}">저장</button>
+        </div>
     </div>
 
     <div class="c-c-c" th:each="ele : ${qList}" style="margin-bottom: 10px; border: 3px solid black; padding: 10px;">
+        <div class="r-c-c">
+        <div style="font-size: 25px; color: orange;">[[ ${ele.qnum} ]] 번 문제 :&nbsp;</div> <input type="text" class="question" th:data-qno="${ele.qnum}" style="width: 90%; height: 40px; margin-bottom: 10px; border-bottom: 2px solid black;" th:value="${ele.question}">
+        </div>
 
-        <div style="margin-bottom: 10px; border-bottom: 2px solid black;">[ [[${ele.qnum}]] ]번 문제 : [[${ele.question}]]</div>
+        <div class="r-c-c">
+            <div>1 :&nbsp;&nbsp;</div> <input type="text"  class="option-1" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op1}">
+        </div>
 
-        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 1번 보기 ] : [[${ele.op1}]]</div>
+        <div class="r-c-c">
+            <div>2 :&nbsp;&nbsp;</div> <input type="text"  class="question-2" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op2}">
+        </div>
 
-        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 2번 보기 ] : [[${ele.op2}]]</div>
+        <div class="r-c-c">
+            <div>3 :&nbsp;&nbsp;</div> <input type="text"  class="question-3" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op3}">
+        </div>
 
-        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 3번 보기 ] : [[${ele.op3}]]</div>
+        <div class="r-c-c">
+            <div>4 :&nbsp;&nbsp;</div> <input type="text"  class="question-4" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op4}">
+        </div>
 
-        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 4번 보기 ] : [[${ele.op4}]]</div>
+        <div class="r-c-c">
+            <div>5 :&nbsp;&nbsp;</div> <input type="text"  class="question-5" th:data-qno="${ele.qnum}" style="width: 90%; height: 30px; margin-bottom: 10px; border-bottom: 1px solid black;" th:value="${ele.op5}">
+        </div>
 
-        <div>[ 5번 보기 ] : [[${ele.op5}]]</div>
+        <div class="r-c-c">
+            <button class="q-img-btn" th:id="${ele.qnum}">이미지 추가</button>
+
+            <button style="margin-left: 20px;" class="q-submit-btn" th:id="${ele.qnum}">저장</button>
+        </div>
     </div>
 
 </div>
