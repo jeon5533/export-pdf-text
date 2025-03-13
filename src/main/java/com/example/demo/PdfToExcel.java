@@ -7,7 +7,6 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.IOException;
@@ -112,7 +111,7 @@ public class PdfToExcel {
                     /*
                     * 공통 지문 시작 끝 _sCp , /eCp - ok
                     * 문제 + 보기 시작 끝 _sQ , /eQ - ok
-                    * 선택지 시작 끝 _1s , /1e - ok (5번 처리 필요)
+                    * 선택지 시작 끝 _1s , /1e - ok
                     */
                     switch (ch){
 
@@ -143,9 +142,9 @@ public class PdfToExcel {
             
             // 문제 구성 요소 시작 끝 표시
             pdfText = pdfText.replaceAll("\\[(\\d+)～(\\d+)\\]" , "_sCp[$1~$2]") // 공통 지문 시작
-                    .replaceAll("(_sCp)(.*?)(<br>)(\\d+\\.)" , "$1$2/eCp<br>$4") // 공통 지문 끝
+                    .replaceAll("(_sCp)(.*?)(<br>)(\\d+\\.)" , "$1$2/eCp_sepLine_<br>$4") // 공통 지문 끝
                     .replaceAll("(<br>)(\\d+\\.)" , "<br>_sQ$2") // 문제 시작
-                    .replaceAll("(⑤)(.*?)(?=<br>)" , "$1$2/5e<br>") // 5번 선택지 종료
+                    .replaceAll("(⑤)(.*?)(?=<br>)" , "$1$2/5e<br>_sepLine_") // 5번 선택지 종료
                     .replaceAll("<br>", "");
 
 
@@ -153,11 +152,10 @@ public class PdfToExcel {
             List<Map<String,String>> cpList = new ArrayList<>();
             Pattern cpPattern = Pattern.compile("_sCp(.*?)/eCp");
             Matcher matcher = cpPattern.matcher(pdfText);
+            String reg = "\\[(\\d+)~(\\d+)\\]";
             while (matcher.find()) {
 
                 String matchStr = matcher.group(1);
-
-                String reg = "\\[(\\d+)~(\\d+)\\]";
 
                 Matcher mat = Pattern.compile(reg).matcher(matchStr);
 
@@ -172,6 +170,63 @@ public class PdfToExcel {
             }
 
 
+            // 문제 덩어리만 주줄 (문제 , 보기 , 선택지)
+            List<String> compList = Arrays.asList(pdfText.split("_sepLine_"));
+            List<String> qResList = new ArrayList<>();
+
+            for(String comp : compList){
+                if(comp.startsWith("_sQ")){
+                    qResList.add(comp);
+                }
+            }
+
+            // 문제 List
+            List<LinkedHashMap<String,String>> qList = new ArrayList<>();
+            String qReg = "(_sQ)(\\d+\\.)(.*?)(/eQ)";
+
+            String qnReg = "(_sQ)(\\d+)(\\.)";
+
+            String op1Reg = "(_1s①)(.*?)(/1e)";
+            String op2Reg = "(_2s②)(.*?)(/2e)";
+            String op3Reg = "(_3s③)(.*?)(/3e)";
+            String op4Reg = "(_4s④)(.*?)(/4e)";
+            String op5Reg = "(_5s⑤)(.*?)(/5e)";
+
+            for(String qStr : qResList){
+                LinkedHashMap<String,String> element = new LinkedHashMap<>();
+
+                Matcher qmat = Pattern.compile(qReg).matcher(qStr);
+                String question =  qmat.find() ? qmat.group(3) : "";
+
+                Matcher qnmat = Pattern.compile(qnReg).matcher(qStr);
+                String qnum = qnmat.find() ? qnmat.group(2) : "";
+
+                Matcher op1mat = Pattern.compile(op1Reg).matcher(qStr);
+                String op1 = op1mat.find() ? op1mat.group(2) : "";
+
+                Matcher op2mat = Pattern.compile(op2Reg).matcher(qStr);
+                String op2 = op2mat.find() ? op2mat.group(2) : "";
+
+                Matcher op3mat = Pattern.compile(op3Reg).matcher(qStr);
+                String op3 = op3mat.find() ? op3mat.group(2) : "";
+
+                Matcher op4mat = Pattern.compile(op4Reg).matcher(qStr);
+                String op4 = op4mat.find() ? op4mat.group(2) : "";
+
+                Matcher op5mat = Pattern.compile(op5Reg).matcher(qStr);
+                String op5 = op5mat.find() ? op5mat.group(2) : "";
+
+
+                element.put("qnum" , qnum);
+                element.put("question" , question);
+                element.put("op1" , op1);
+                element.put("op2" , op2);
+                element.put("op3" , op3);
+                element.put("op4" , op4);
+                element.put("op5" , op5);
+                qList.add(element);
+
+            }
 
             /*
              * 공통 지문 시작 끝 _sCp , /eCp - ok
