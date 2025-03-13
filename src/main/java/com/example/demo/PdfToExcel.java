@@ -22,16 +22,13 @@ public class PdfToExcel {
     public String run(Model model) throws Exception{
 
         // 수능 국어 기출 문제 폴더 : 2015 ~ 2025
-        String folderPath = "C:\\Users\\jeon\\Desktop\\pdf_to_excel\\kor\\";
+        String folderPath = "C:\\Users\\jeon\\Desktop\\pdf_to_excel\\kor\\25_O_odd.pdf";
 
         // 디렉토리
-        File folder = new File(folderPath);
+        File file = new File(folderPath);
 
-        // 파일 목록
-        File[] files = folder.listFiles();
 
         String pdfText = "";
-        for (File file : files) {
 
             // pdf
             PDDocument document = Loader.loadPDF(file);
@@ -233,6 +230,7 @@ public class PdfToExcel {
              * 문제 + 보기 시작 끝 _sQ , /eQ - ok
              * 선택지 시작 끝 _1s , /1e - ok (5번 처리 필요)
              */
+            /*
             pdfText = pdfText.replaceAll("(_sCp)(.*?)(/eCp)" , "<textarea class=\"t-ar\">$2</textarea><div class=\"line\"></div>")
                             .replaceAll("(_sQ)(\\d+)(.)(.*?)(/eQ)" , "<input type=\"text\" class=\"q-ar\" data-qtionno=\"$2\" value=\"$4\"/>")
                             .replaceAll("(_1s)(.*?)(/1e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"1\" value=\"$2\"/>")
@@ -240,14 +238,14 @@ public class PdfToExcel {
                             .replaceAll("(_3s)(.*?)(/3e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"3\" value=\"$2\"/>")
                             .replaceAll("(_4s)(.*?)(/4e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"4\" value=\"$2\"/>")
                             .replaceAll("(_5s)(.*?)(/5e)","<input type=\"text\" class=\"op-ar\" data-optionno=\"5\" value=\"$2\"/><div class=\"line\"></div>");
-
-            System.out.println(pdfText);
+            */
+            // System.out.println(pdfText);
             // pdfText = "";
-        }
 
+        // model.addAttribute("content" , "<div style=\"display: flex; flex-direction: column;\">"+pdfText+"</div>");
 
-        model.addAttribute("content" , "<div style=\"display: flex; flex-direction: column;\">"+pdfText+"</div>");
-
+        model.addAttribute("cpList" , cpList);
+        model.addAttribute("qList" , qList);
         return "/form.html";
 
 

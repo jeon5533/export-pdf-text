@@ -14,7 +14,30 @@
 </head>
 <body>
 
-<div th:utext="${content}"></div>
+<div class="c-c-c">
+
+    <div class="c-c-c" th:each="ele : ${cpList}" style="margin-bottom: 10px; border: 3px solid black; padding: 10px;">
+        <div style="margin-bottom: 5px; border-bottom: 1px solid black;">[[${ele.nums}]]</div>
+
+        <div>[[${ele.content}]]</div>
+    </div>
+
+    <div class="c-c-c" th:each="ele : ${qList}" style="margin-bottom: 10px; border: 3px solid black; padding: 10px;">
+
+        <div style="margin-bottom: 10px; border-bottom: 2px solid black;">[ [[${ele.qnum}]] ]번 문제 : [[${ele.question}]]</div>
+
+        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 1번 보기 ] : [[${ele.op1}]]</div>
+
+        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 2번 보기 ] : [[${ele.op2}]]</div>
+
+        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 3번 보기 ] : [[${ele.op3}]]</div>
+
+        <div style="margin-bottom: 10px; border-bottom: 1px solid black;">[ 4번 보기 ] : [[${ele.op4}]]</div>
+
+        <div>[ 5번 보기 ] : [[${ele.op5}]]</div>
+    </div>
+
+</div>
 
 <!-- script -->
 <script th:src="@{/common.js}"></script>
